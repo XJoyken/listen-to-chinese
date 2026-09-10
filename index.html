@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">Тренировка произношения</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw" async></script>
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <header>
+            <h1 data-i18n="title">Тренировка произношения</h1>
+            <div class="header-controls">
+                <button id="settingsToggle" data-i18n="settingsTitle">Настройки</button>
+            </div>
+        </header>
+
+        <section id="settingsPanel" class="hidden">
+            <div class="settings-grid">
+                <div>
+                    <label data-i18n="languageLabel">Язык:</label>
+                    <select id="langSelect">
+                        <option value="ru">Русский</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div>
+                    <label data-i18n="ttsEngineLabel">TTS Движок:</label>
+                    <select id="engineSelect">
+                        <option value="web" data-i18n="engineWeb">Web Speech API</option>
+                        <option value="azure" data-i18n="engineAzure">Azure TTS</option>
+                    </select>
+                </div>
+                <div>
+                    <label data-i18n="voiceLabel">Голос:</label>
+                    <select id="voiceSelect">
+                        <option value="female" data-i18n="voiceFemale">Xiaoxiao (Женский)</option>
+                        <option value="male" data-i18n="voiceMale">Yunxi (Мужской)</option>
+                    </select>
+                </div>
+                <div>
+                    <label data-i18n="delayLabel">Задержка (сек):</label>
+                    <input type="range" id="delayRange" min="0.5" max="10" step="0.5" value="2.5">
+                    <span id="delayValue">2.5</span>
+                </div>
+                <div class="checkbox-container">
+                    <label>
+                        <input type="checkbox" id="loopToggle">
+                        <span data-i18n="loopLabel">Зациклить воспроизведение</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <main>
+            <textarea id="inputText" data-i18n="inputPlaceholder" placeholder="Введите пиньинь или иероглифы (разделяйте пробелами, запятыми или новыми строками)"></textarea>
+            <div id="validationWarning" class="validation-warning hidden"></div>
+            
+            <div class="main-controls">
+                <button id="startBtn" class="primary" data-i18n="startBtn">Старт (Перемешать)</button>
+                <button id="playPauseBtn" data-i18n="playPauseBtn" disabled>Пауза</button>
+                <button id="repeatBtn" data-i18n="repeatBtn" disabled>Повторить</button>
+                <button id="reshuffleBtn" data-i18n="reshuffleBtn" disabled>Перемешать заново</button>
+            </div>
+
+            <div id="displayArea" class="display-area">
+                <div id="displayText" class="display-text"></div>
+                <div id="progressText" class="progress-text"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/parser.js"></script>
+    <script src="js/shuffler.js"></script>
+    <script src="js/tts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
