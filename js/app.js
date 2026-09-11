@@ -20,6 +20,7 @@ const elements = {
     displayArea: document.getElementById('displayArea'),
     displayText: document.getElementById('displayText'),
     progressText: document.getElementById('progressText'),
+    historyArea: document.getElementById('historyArea'),
     
     settingsToggle: document.getElementById('settingsToggle'),
     settingsPanel: document.getElementById('settingsPanel'),
@@ -97,6 +98,14 @@ function validateInput() {
     }
 }
 
+function appendToHistory(item) {
+    const el = document.createElement('div');
+    el.className = 'history-item';
+    if (item.isChinese) el.classList.add('large-char');
+    el.textContent = item.text;
+    elements.historyArea.appendChild(el);
+}
+
 function startSession() {
     const text = elements.input.value;
     if (!text.trim()) {
@@ -111,6 +120,7 @@ function startSession() {
     currentIndex = 0;
     isPlaying = true;
     isWaitingForDelay = false;
+    elements.historyArea.innerHTML = '';
     
     elements.playPauseBtn.disabled = false;
     elements.repeatBtn.disabled = false;
@@ -129,6 +139,7 @@ function reshuffleAndRestart() {
     playlist = shuffle([...playlist]);
     currentIndex = 0;
     isPlaying = true;
+    elements.historyArea.innerHTML = '';
     
     elements.playPauseBtn.disabled = false;
     elements.repeatBtn.disabled = false;
@@ -156,6 +167,7 @@ function togglePlayPause() {
         
         if (isWaitingForDelay) {
             isWaitingForDelay = false;
+            appendToHistory(playlist[currentIndex]);
             currentIndex++;
         }
         playCurrentItem();
@@ -229,6 +241,7 @@ async function playCurrentItem() {
     timeoutId = setTimeout(() => {
         isWaitingForDelay = false;
         if (isPlaying) {
+            appendToHistory(playlist[currentIndex]);
             currentIndex++;
             playCurrentItem();
         }

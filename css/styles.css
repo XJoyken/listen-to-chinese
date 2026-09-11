@@ -191,3 +191,33 @@ textarea {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+.history-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    min-height: 50px;
+    align-content: flex-start;
+}
+
+.history-area:empty {
+    display: none;
+}
+
+.history-item {
+    font-size: 1.5rem;
+    padding: 5px 12px;
+    background-color: #2c2c2c;
+    border-radius: 6px;
+    color: #bbb;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.history-item.large-char {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 1.8rem;
+}
