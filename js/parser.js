@@ -17,7 +17,7 @@ function parseInput(text) {
 }
 
 function isChineseCharacter(str) {
-    return /^[\u4e00-\u9fff]+$/.test(str);
+    return /^[\u4e00-\u9fff\u2f00-\u2fdf]+$/.test(str);
 }
 
 function isValidItem(str) {
