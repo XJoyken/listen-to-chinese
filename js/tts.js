@@ -13,6 +13,10 @@ class TTSController {
 
     async speak(text, engine, voice, azureKey, azureRegion) {
         this.stop(); // Stop any ongoing speech
+        
+        // Normalize text to convert Kangxi Radicals to standard CJK Unified Ideographs for TTS
+        text = text ? text.normalize('NFKC') : text;
+
         return new Promise(async (resolve, reject) => {
             this.isSpeaking = true;
             this.onComplete = resolve;
